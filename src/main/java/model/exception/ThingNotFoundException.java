@@ -1,8 +1,10 @@
 package model.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ThingNotFoundException extends RuntimeException {
     public ThingNotFoundException() {
         this("Thing not found");
