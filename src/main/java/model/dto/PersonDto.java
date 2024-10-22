@@ -1,6 +1,9 @@
 package model.dto;
 
-import java.util.List;
+import model.entity.Role;
 
-public record PersonDto(Long id, String name, String email, String password, List<DonationDto> donations, List<DonationDto> benefits) {
+import java.util.List;
+import java.util.Set;
+
+public record PersonDto(Long id, String username, String name, String email, String password, List<DonationDto> donations, List<DonationDto> benefits, Set<Role> roles) {
 }
