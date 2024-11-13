@@ -17,7 +17,7 @@ import java.util.Optional;
 public class PersonController {
     private PersonService personService;
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<PersonDto>> getPersons(){
         return ResponseEntity.ok(personService.findAll());
     }
@@ -27,7 +27,7 @@ public class PersonController {
                 .map(p->ResponseEntity.ok().body(p))
                 .orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping("/id")
+    @PostMapping()
     public ResponseEntity<PersonDto> createPerson(@RequestBody PersonDto personDto){
         return createNewPerson(personDto);
     }
