@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/things")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ThingController {
     private ThingService thingService;
 
@@ -27,14 +28,14 @@ public class ThingController {
         return createNewThing(thing);
     }
 
-    @PutMapping("/id")
-    public ResponseEntity<ThingDto> updateThing(@RequestBody Long id, ThingDto thing) {
+    @PutMapping("/{id}")
+    public ResponseEntity<ThingDto> updateThing(@PathVariable Long id, @RequestBody ThingDto thing) {
         Optional<ThingDto> thingUpdated = thingService.update(id, thing);
         return thingUpdated.map(ResponseEntity::ok).orElseGet(() -> createNewThing(thing));
     }
 
     @DeleteMapping("/id")
-    public ResponseEntity<ThingDto> deleteThing(Long id) {
+    public ResponseEntity<ThingDto> deleteThing(@RequestBody Long id) {
         thingService.delete(id);
         return ResponseEntity.noContent().build();
     }

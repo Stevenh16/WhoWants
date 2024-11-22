@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/donations")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class DonationController {
     private DonationService donationService;
 
@@ -31,13 +32,13 @@ public class DonationController {
     public ResponseEntity<DonationDto> createDonation(@RequestBody DonationDto donation){
         return createNewDonation(donation);
     }
-    @PutMapping("/id")
-    public ResponseEntity<DonationDto> updateDonation(@RequestBody Long id, DonationDto donation){
+    @PutMapping("/{id}")
+    public ResponseEntity<DonationDto> updateDonation(@PathVariable Long id, @RequestBody DonationDto donation){
         Optional<DonationDto> donationUpdated = donationService.update(id, donation);
         return donationUpdated.map(ResponseEntity::ok).orElseGet(()->createNewDonation(donation));
     }
     @DeleteMapping("/id")
-    public ResponseEntity<DonationDto> deleteDonationById(@RequestParam Long id){
+    public ResponseEntity<DonationDto> deleteDonationById(@RequestBody Long id){
         donationService.delete(id);
         return ResponseEntity.noContent().build();
     }

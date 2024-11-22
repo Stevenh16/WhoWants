@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/ratings")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class RatingController {
     private RatingService ratingService;
 
@@ -26,14 +27,14 @@ public class RatingController {
         return createNewRating(ratingDto);
     }
 
-    @PutMapping("/id")
-    public ResponseEntity<RatingDto> updateRating(@RequestBody Long id, RatingDto ratingDto){
+    @PutMapping("/{id}")
+    public ResponseEntity<RatingDto> updateRating(@PathVariable Long id, @RequestBody RatingDto ratingDto){
         Optional<RatingDto> ratingUpdated = ratingService.update(id, ratingDto);
         return ratingUpdated.map(ResponseEntity::ok).orElseGet(() ->createNewRating(ratingDto));
     }
 
     @DeleteMapping("/id")
-    public ResponseEntity<RatingDto> deleteRating(Long id){
+    public ResponseEntity<RatingDto> deleteRating(@RequestBody Long id){
         ratingService.delete(id);
         return ResponseEntity.noContent().build();
     }
