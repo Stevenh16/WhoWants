@@ -23,6 +23,10 @@ public class ThingController {
         return ResponseEntity.ok(thingService.findAll());
     }
 
+    @GetMapping("/id")
+    public ResponseEntity<ThingDto> getThingById(@RequestParam Long id) {
+        return thingService.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
     @PostMapping()
     public ResponseEntity<ThingDto> createThing(@RequestBody ThingDto thing) {
         return createNewThing(thing);
