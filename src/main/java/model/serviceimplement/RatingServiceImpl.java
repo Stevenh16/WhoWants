@@ -31,7 +31,7 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public Optional<RatingDto> update(Long id, RatingDto ratingDto) {
         return ratingRepository.findById(id).map(oldRating -> {
-            oldRating.setDonation(donationMapper.toEntity(ratingDto.donation()));
+            oldRating.setDonation(donationMapper.mapToDonation(ratingDto.donation()));
             oldRating.setComment(ratingDto.comment());
             oldRating.setStars(ratingDto.stars());
             return ratingMapper.toIdDto(ratingRepository.save(oldRating));
