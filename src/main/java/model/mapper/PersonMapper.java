@@ -11,64 +11,32 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {DonationMapper.class})
 public interface PersonMapper {
     @Named("complete")
-    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listCompleteWithoutEntities")
-    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listCompleteWithoutEntities")
+    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listComplete")
+    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listComplete")
     PersonDto toIdDto(Person person);
 
     @Named("withoutId")
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listWithoutIdWithoutEntities")
-    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listWithoutIdWithoutEntities")
+    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listWithoutId")
+    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listWithoutId")
     PersonDto toDto(Person person);
 
     @Named("listComplete")
-    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listCompleteWithoutEntities")
-    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listCompleteWithoutEntities")
+    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listComplete")
+    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listComplete")
     List<PersonDto> toListIdDto(List<Person> persons);
 
     @Named("listWithoutId")
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listWithoutIdeWithoutEntities")
-    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listWithoutIdWithoutEntities")
+    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listWithoutId")
+    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listWithoutId")
     List<PersonDto> toListDto(List<Person> persons);
 
-    @Mapping(source = "personDto.donations", target = "donations", qualifiedByName = "listEntityWithoutDtos")
-    @Mapping(source = "personDto.benefits", target = "benefits", qualifiedByName = "listEntityWithoutDtos")
+    @Mapping(source = "personDto.donations", target = "donations")
+    @Mapping(source = "personDto.benefits", target = "benefits")
     Person toEntity(PersonDto personDto);
 
-    @Mapping(source = "person.donations", target = "donations", qualifiedByName = "listEntityWithoutEntities")
-    @Mapping(source = "person.benefits", target = "benefits", qualifiedByName = "listEntityWithoutEntities")
+    @Mapping(source = "person.donations", target = "donations")
+    @Mapping(source = "person.benefits", target = "benefits")
     List<Person> toListEntity(List<PersonDto> personDtos);
-
-    @Named("completeWithoutDonation")
-    @Mapping(target = "donations", ignore = true)
-    @Mapping(target = "benefits", ignore = true)
-    PersonDto toIdDtoWithoutDonation(Person person);
-
-    @Named("listCompleteWithoutDonation")
-    @Mapping(target = "donations", ignore = true)
-    @Mapping(target = "benefits", ignore = true)
-    List<PersonDto> toListIdDtoWithoutDonation(List<Person> persons);
-
-    @Named("withoutIdWithoutDonation")
-    @Mapping(target = "donations", ignore = true)
-    @Mapping(target = "benefits", ignore = true)
-    @Mapping(target = "id", ignore = true)
-    PersonDto toDtoWithoutDonation(Person person);
-
-    @Named("listWithoutIdWithoutDonation")
-    @Mapping(target = "donations", ignore = true)
-    @Mapping(target = "benefits", ignore = true)
-    @Mapping(target = "id", ignore = true)
-    List<PersonDto> toListDtoWithoutDonation(List<Person> persons);
-
-    @Named("entityWithoutDonation")
-    @Mapping(target = "donations", ignore = true)
-    @Mapping(target = "benefits", ignore = true)
-    Person toEntityWithoutDonation(PersonDto personDto);
-
-    @Named("listEntityWithoutDonation")
-    @Mapping(target = "donations", ignore = true)
-    @Mapping(target = "benefits", ignore = true)
-    List<Person> toListEntityWithoutDonation(List<PersonDto> personDtos);
 }
