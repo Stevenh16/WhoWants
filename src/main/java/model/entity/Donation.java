@@ -20,6 +20,8 @@ public class Donation {
     private Long id;
     @Column(name="date")
     private LocalDateTime date;
+    @Column(name="img")
+    private String img;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "donor")
     private Person donor;
