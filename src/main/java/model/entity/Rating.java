@@ -1,5 +1,7 @@
 package model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +22,9 @@ public class Rating {
     private String comment;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="donation")
+    @JsonIgnore
     private Donation donation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="person")
+    private Person person;
 }

@@ -1,5 +1,6 @@
 package model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,10 +26,15 @@ public class Person {
     private String email;
     @Column(name = "password")
     private String password;
+    @JsonIgnore
     @OneToMany(mappedBy = "donor",fetch = FetchType.LAZY)
     private List<Donation> donations;
     @OneToMany(mappedBy = "beneficiary",fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Donation> benefits;
+    @OneToMany(mappedBy = "person",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Rating> ratings;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
