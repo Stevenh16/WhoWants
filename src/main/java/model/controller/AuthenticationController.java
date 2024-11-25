@@ -56,7 +56,7 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest sRequest){
         Role defaultRole = roleRepository.findByRole(ERole.ROLE_USER).get();
-        Person user = new Person(null, null,sRequest.username(), sRequest.email(), passwordEncoder.encode(sRequest.password()),null,null,new HashSet<>(Set.of(defaultRole)));
+        Person user = new Person(null, sRequest.name(),sRequest.username(), sRequest.email(), passwordEncoder.encode(sRequest.password()),null,null,null,new HashSet<>(Set.of(defaultRole)));
         Person newUser = userRepository.save(user);
         return ResponseEntity.ok(newUser);
     }
