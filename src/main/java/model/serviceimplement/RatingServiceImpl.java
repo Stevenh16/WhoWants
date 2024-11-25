@@ -32,6 +32,7 @@ public class RatingServiceImpl implements RatingService {
     public Optional<RatingDto> update(Long id, RatingDto ratingDto) {
         return ratingRepository.findById(id).map(oldRating -> {
             oldRating.setDonation(donationMapper.mapToDonation(ratingDto.donation()));
+            oldRating.setPerson(donationMapper.mapToPerson(ratingDto.person()));
             oldRating.setComment(ratingDto.comment());
             oldRating.setStars(ratingDto.stars());
             return ratingMapper.toIdDto(ratingRepository.save(oldRating));

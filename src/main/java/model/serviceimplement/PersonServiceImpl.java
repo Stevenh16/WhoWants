@@ -5,6 +5,7 @@ import model.dto.PersonDto;
 import model.entity.Person;
 import model.mapper.DonationMapper;
 import model.mapper.PersonMapper;
+import model.mapper.RatingMapperImpl;
 import model.repository.PersonRepository;
 import model.service.PersonService;
 import org.springframework.data.domain.Example;
@@ -36,6 +37,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findById(id).map(oldPerson ->{
             oldPerson.setBenefits(donationMapper.toListEntity(personDto.benefits()));
             oldPerson.setDonations(donationMapper.toListEntity(personDto.donations()));
+            oldPerson.setRatings(personDto.ratings());
             oldPerson.setName(personDto.name());
             oldPerson.setEmail(personDto.email());
             oldPerson.setPassword(personDto.password());
