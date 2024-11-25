@@ -3,6 +3,8 @@ package model.serviceimplement;
 import lombok.AllArgsConstructor;
 import model.dto.DonationDto;
 import model.entity.Donation;
+import model.entity.Person;
+import model.entity.Thing;
 import model.mapper.DonationMapper;
 import model.mapper.RatingMapper;
 import model.repository.DonationRepository;
@@ -66,6 +68,22 @@ public class DonationServiceImpl implements DonationService{
     public List<DonationDto> findByDate(LocalDateTime date) {
         Donation d = new Donation();
         d.setDate(date);
+        Example<Donation> example = Example.of(d);
+        return donationMapper.toListIdDto(donationRepository.findAll(example));
+    }
+
+    @Override
+    public List<DonationDto> findByThingName(String thingName) {
+        Donation d = new Donation();
+        d.setThing(new Thing(null,thingName,null,null));
+        Example<Donation> example = Example.of(d);
+        return donationMapper.toListIdDto(donationRepository.findAll(example));
+    }
+
+    @Override
+    public List<DonationDto> findByPersonId(Long personId) {
+        Donation d = new Donation();
+        d.setDonor(personRepository.findById(personId).get());
         Example<Donation> example = Example.of(d);
         return donationMapper.toListIdDto(donationRepository.findAll(example));
     }
