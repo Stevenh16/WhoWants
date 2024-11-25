@@ -77,7 +77,9 @@ public class DonationServiceImpl implements DonationService{
         Donation d = new Donation();
         d.setThing(new Thing(null,thingName,null,null));
         Example<Donation> example = Example.of(d);
-        return donationMapper.toListIdDto(donationRepository.findAll(example));
+        List<DonationDto> donations = donationMapper.toListIdDto(donationRepository.findAll(example));
+        donations.sort((d1, d2) -> d2.date().compareTo(d1.date()));
+        return donations;
     }
 
     @Override
@@ -85,7 +87,9 @@ public class DonationServiceImpl implements DonationService{
         Donation d = new Donation();
         d.setDonor(personRepository.findById(personId).get());
         Example<Donation> example = Example.of(d);
-        return donationMapper.toListIdDto(donationRepository.findAll(example));
+        List<DonationDto> donations = donationMapper.toListIdDto(donationRepository.findAll(example));
+        donations.sort((d1, d2) -> d2.date().compareTo(d1.date()));
+        return donations;
     }
 
     @Override
