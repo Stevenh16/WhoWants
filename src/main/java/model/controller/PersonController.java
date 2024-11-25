@@ -28,11 +28,14 @@ public class PersonController {
                 .map(p->ResponseEntity.ok().body(p))
                 .orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping("/name")
+    public ResponseEntity<List<PersonDto>> getPersonByName(@RequestParam String name){
+        return ResponseEntity.ok(personService.findByName(name));
+    }
     @PostMapping()
     public ResponseEntity<PersonDto> createPerson(@RequestBody PersonDto personDto){
         return createNewPerson(personDto);
     }
-
     private ResponseEntity<PersonDto> createNewPerson(PersonDto personDto) {
         PersonDto personIdDto = personService.save(personDto);
         URI location = ServletUriComponentsBuilder

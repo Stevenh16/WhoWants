@@ -28,6 +28,14 @@ public class DonationController {
                 .map(d->ResponseEntity.ok().body(d))
                 .orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping("/thingName")
+    public ResponseEntity<List<DonationDto>> getDonationByThingName(@RequestParam String thingName){
+        return ResponseEntity.ok(donationService.findByThingName(thingName));
+    }
+    @GetMapping("/personId")
+    public ResponseEntity<List<DonationDto>> getDonationByPersonId(@RequestParam Long personId){
+        return ResponseEntity.ok(donationService.findByPersonId(personId));
+    }
     @PostMapping()
     public ResponseEntity<DonationDto> createDonation(@RequestBody DonationDto donation){
         return createNewDonation(donation);
