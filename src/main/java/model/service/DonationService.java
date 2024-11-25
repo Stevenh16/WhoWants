@@ -12,5 +12,7 @@ public interface DonationService {
     Optional<DonationDto> update(Long id, DonationDto donationDto);
     List<DonationDto> findAll();
     List<DonationDto> findByDate(LocalDateTime date);
+    List<DonationDto> findByThingName(String thingName);
+    List<DonationDto> findByPersonId(Long personId);
     void delete(Long id);
 }
